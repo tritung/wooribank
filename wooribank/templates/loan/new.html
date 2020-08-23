@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+           <h6 class="mb-0 font-weight-bold text-primary">New Loan</h6>
+      </div>
+      <div class="card-body">
+	      <form class="user" method="post" action="{% url 'create_or_update' %}">
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputName">Name</label>
+			      <input type="text" class="form-control" id="inputName" placeholder="Name">
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputType">Type</label>
+			      <select id="inputType" class="form-control">
+			        <option value="0" selected>V-LOAN / C-LOAN</option>
+			        <option value="1">CREDIT CARD</option>
+			      </select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputAddress">Description</label>
+			    <input type="text" class="form-control" id="inputAddress" placeholder="Description">
+			  </div>
+			  <div class="form-group">
+			    <label for="inputAddress">Note</label>
+			    <textarea class="form-control" id="inputAddress" placeholder="Note"></textarea>
+			  </div>
+			  <div class="form-group">
+			  	  <label for="inputAddress">APP VÀ FORM</label>
+				  <div class="file-loading">
+	                 <input id="app_form" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
+	             </div>
+			  </div>
+			  <button type="button" class="btn btn-primary">SUBMIT</button>
+			</form>
+      </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#app_form").fileinput({
+	        theme: 'fas',
+	        //uploadUrl: '#', // you must set a valid URL here else you will get an error
+	        allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf'],
+	        overwriteInitial: false,
+	        maxFileSize: 1000,
+	        maxFilesNum: 10,
+	        slugCallback: function (filename) {
+	            return filename.replace('(', '_').replace(']', '_');
+	        }
+	    });
+	});
+</script>
+{% endblock %}
